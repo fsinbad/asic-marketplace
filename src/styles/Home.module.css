@@ -23,13 +23,41 @@
 }
 
 .title,
-.description {
+.description,
+.cart {
     text-align: center;
 }
 
-.description {
+.description,
+.cart {
     line-height: 1.5;
     font-size: 1.5rem;
+}
+
+.cart {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.cart li {
+    display: flex;
+    align-items: center;
+    margin: 0 0.5em;
+}
+
+.cart strong,
+.cart svg {
+    margin-right: 0.4em;
+}
+
+.cartButton {
+    display: inline-flex;
+    align-items: center;
+    color: blueviolet;
+    background: none;
+    box-shadow: none;
+    padding: 0;
 }
 
 .grid {
