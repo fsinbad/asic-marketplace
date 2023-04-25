@@ -4,21 +4,14 @@ import Image from 'next/image'
 // import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import products from '@/products.json'
-import useCart from "@/hooks/use-cart";
+import {useCartContext} from "@/hooks/use-cart";
 import {initiateCheckout} from "@/lib/payments";
 
 // const inter = Inter({ subsets: ['latin'] });
 
 
 export default function Home() {
-    const {subtotal, quantity, addToCart} = useCart();
-
-
-    // console.log('products', products)
-
-    function checkout() {
-        initiateCheckout()
-    }
+    const {subtotal, quantity, addToCart, checkout} = useCartContext();
 
 
     return (
@@ -29,9 +22,9 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
-                <h1 className={styles.title}>
-                    Android Marketplace
-                </h1>
+                {/*<h1 className={styles.title}>*/}
+                {/*    Android Marketplace*/}
+                {/*</h1>*/}
 
                 <p className={styles.description}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit!
@@ -61,13 +54,13 @@ export default function Home() {
                                 <h3>{title}</h3>
                                 <p>{price}</p>
                                 <p>{description}</p>
+                                <p>
+                                    <button className={styles.button} onClick={() => {
+                                        addToCart({id})
+                                    }}>Buy
+                                    </button>
+                                </p>
                             </a>
-                            <p>
-                                <button className={styles.button} onClick={() => {
-                                    addToCart({id})
-                                }}>Buy
-                                </button>
-                            </p>
                         </li>
                     })}
 
