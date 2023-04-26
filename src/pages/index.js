@@ -30,21 +30,7 @@ export default function Home() {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit!
                 </p>
 
-                <ul className={styles.cart}>
-                    <li>
-                        <strong>Items:</strong> {quantity}
-                    </li>
-                    <li>
-                        <strong>Total:</strong> ${subtotal}
-                    </li>
-                    <li>
-                        <button className={`${styles.button} ${styles.cartButton}`} onClick={checkout}>
-                            <FaShoppingCart/>Check Out
-                        </button>
-                    </li>
-                </ul>
-
-
+                
                 <ul className={styles.grid}>
                     {products.map(product => {
                         const {id, title, description, image, price} = product;
