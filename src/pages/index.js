@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from "next/link"
 import {FaShoppingCart} from "react-icons/fa"
 import Image from 'next/image'
 // import { Inter } from 'next/font/google'
@@ -11,7 +12,7 @@ import {initiateCheckout} from "@/lib/payments";
 
 
 export default function Home() {
-    const {subtotal, quantity, addToCart, checkout} = useCartContext();
+    const {addToCart} = useCartContext();
 
 
     return (
@@ -30,23 +31,23 @@ export default function Home() {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit!
                 </p>
 
-                
+
                 <ul className={styles.grid}>
                     {products.map(product => {
                         const {id, title, description, image, price} = product;
                         return <li key={id} className={styles.card}>
-                            <a href="#">
+                            <Link href={`/products/${id}`}>
                                 <img src={image} alt={title}/>
                                 <h3>{title}</h3>
                                 <p>{price}</p>
                                 <p>{description}</p>
-                                <p>
-                                    <button className={styles.button} onClick={() => {
-                                        addToCart({id})
-                                    }}>Buy
-                                    </button>
-                                </p>
-                            </a>
+                            </Link>
+                            <p>
+                                <button className={styles.button} onClick={() => {
+                                    addToCart({id})
+                                }}>Buy
+                                </button>
+                            </p>
                         </li>
                     })}
 

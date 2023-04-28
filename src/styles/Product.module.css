@@ -1,0 +1,39 @@
+.container {
+    min-height: 100vh;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    padding: 3rem 0;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.productImage {
+    margin-right: 2em;
+}
+
+.productImage img {
+    max-width: 400px;
+}
+
+.button {
+    color: white;
+    font-family: inherit;
+    font-size: 1.2em;
+    font-weight: 700;
+    background-color: blueviolet;
+    padding: 0.8em 1.4em;
+    border-radius: 0.2em;
+    border: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.footer {
+}

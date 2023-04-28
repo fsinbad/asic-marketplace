@@ -4,20 +4,20 @@
     "title": "Android Phone 1",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
     "image": "",
-    "price": "Price 1"
+    "price": 1
   },
   {
     "id": "id 2",
     "title": "Android Phone 2",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
     "image": "",
-    "price": "Price 2"
+    "price": 2
   },
   {
     "id": "id 3",
     "title": "Android Phone 3",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
     "image": "",
-    "price": "Price 3"
+    "price": 3
   }
 ]
