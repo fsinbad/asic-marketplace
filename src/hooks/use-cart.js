@@ -30,7 +30,7 @@ export function useCartState() {
 
     const cartItems = Object.keys(cart.products).map(key => {
         const product = products.find(({id}) => `${id}` === `${key}`);
-        return {...cart.products[key], pricePerUnit: product["price"]}
+        return {...cart.products[key], pricePerUnit: product["price"], title: product["title"]}
     })
 
     const subtotal = cartItems.reduce((accumulator, {pricePerUnit, quantity}) => {
@@ -59,7 +59,7 @@ export function useCartState() {
         initiateCheckout()
     }
 
-    return {cart, subtotal, quantity, addToCart, checkout}
+    return {cart, cartItems, subtotal, quantity, addToCart, checkout}
 }
 
 // Custom hook that provides access to cart context to ease transfer of cart state data throughout the app.
