@@ -7,6 +7,7 @@ import Table from "@/components/Table/Table";
 import {useCartContext} from "@/hooks/use-cart";
 
 import products from "../products.json"
+import Quantity from "@/components/Quantity/Quantity";
 
 const headers = [
     {
@@ -28,7 +29,7 @@ const headers = [
 ]
 
 export default function Cart() {
-    const {cartItems, checkout} = useCartContext();
+    const {cartItems, checkout, updateItem} = useCartContext();
 
     console.log("cartItems", cartItems);
 
@@ -38,7 +39,7 @@ export default function Cart() {
         return {
             id,
             title,
-            quantity,
+            quantity: <Quantity id={id} quantity={quantity} updateItem={updateItem}/>,
             pricePerUnit: pricePerUnit.toFixed(2),
             total: (quantity * pricePerUnit).toFixed(2)
         }

@@ -55,11 +55,25 @@ export function useCartState() {
         })
     }
 
+    function updateItem({id, quantity}) {
+        setCart(prev => {
+            let cart = {...prev};
+
+            if (cart.products[id]) {
+                cart.products[id].quantity = quantity;
+            } else {
+                cart.products[id] = {id, quantity: 1}
+            }
+
+            return cart
+        })
+    }
+
     function checkout() {
         initiateCheckout()
     }
 
-    return {cart, cartItems, subtotal, quantity, addToCart, checkout}
+    return {cart, cartItems, subtotal, quantity, addToCart, updateItem, checkout}
 }
 
 // Custom hook that provides access to cart context to ease transfer of cart state data throughout the app.

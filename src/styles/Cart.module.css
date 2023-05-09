@@ -24,6 +24,10 @@
     margin-bottom: 1.5em;
 }
 
+.title svg {
+    margin-right: 0.5em;
+}
+
 .table {
     font-size: 1.2rem;
 }
