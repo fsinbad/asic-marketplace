@@ -1,4 +1,4 @@
-import styles from "./Nav.module.css"
+import styles from "@/components/Nav/Nav.module.css"
 import {FaShoppingCart} from "react-icons/fa";
 import {useCartContext} from "@/hooks/use-cart";
 import Link from "next/link";
