@@ -1,7 +1,6 @@
 import Head from "next/head";
-import styles from "@/styles/Product.module.css"
-
-import products from '@/products.json'
+import styles from "@/styles/Product.module.css";
+import products from "@/products.json";
 import {useCartContext} from "@/hooks/use-cart";
 
 // Step 1
@@ -9,12 +8,12 @@ import {useCartContext} from "@/hooks/use-cart";
 export async function getStaticPaths() {
     const paths = products.map((product) => {
         const {id} = product;
-        return {params: {productId: id}}
-    })
+        return {params: {productId: id}};
+    });
     return {
         paths,
         fallback: false
-    }
+    };
 }
 
 // Step 2
@@ -22,14 +21,14 @@ export async function getStaticPaths() {
 // Gets params object from getStaticPaths().
 export async function getStaticProps({params}) {
     // Just like getStaticPaths(), getStaticProps() runs inside Node so following will appear in terminal not in browser.
-    console.log("params", params)
+    console.log("params", params);
 
-    const product = products.find(({id}) => `${id}` === `${params.productId}`)
+    const product = products.find(({id}) => `${id}` === `${params.productId}`);
     return {
         props: {
             product
         }
-    }
+    };
 }
 
 // Step 3
@@ -41,37 +40,28 @@ TODO:
     MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-rendering?
 */
 export default function Product({product}) {
-    console.log("product", product)
+    console.log("product", product);
 
-    const {id, title, description, image, price} = product
-    const {addToCart} = useCartContext()
+    const {id, title, description, image, price} = product;
+    const {addToCart} = useCartContext();
 
     return (<div className={styles.container}>
         <Head>
-            <title>{title} - Android Marketplace</title>
+            <title>{title} - ASIC Marketplace</title>
             <link rel="icon" href="/favicon.ico"/>
         </Head>
 
         <main className={styles.main}>
-            <div className={styles.productImage}>
+            <div className={styles.productLeftSide}>
                 <img src={image} alt={title}/>
             </div>
-
-            <div>
-                <h1>
-                    {title}
-                </h1>
-
-                <p className={styles.description}>
-                    {description}
-                </p>
-
-                <p className={styles.description}>
-                    ${price.toFixed(2)}
-                </p>
-
+            <div className={styles.productRightSide}>
+                <h1 className={styles.productTitle}>{title}</h1>
+                <p className={styles.productDescription}>{description}</p>
+                <p className={styles.productPrice}>${price.toFixed(2)}</p>
                 <p>
-                    <button className={styles.button} onClick={() => addToCart({id})}>
+                    {/*<button className={styles.button} onClick={() => addToCart({id})}>*/}
+                    <button className={styles.button} onClick={() => addToCart({id, title, price})}>
                         Buy
                     </button>
                 </p>
@@ -80,5 +70,5 @@ export default function Product({product}) {
 
         <footer className={styles.footer}>
         </footer>
-    </div>)
+    </div>);
 }

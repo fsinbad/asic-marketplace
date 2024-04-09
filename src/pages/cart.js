@@ -1,13 +1,13 @@
-import Head from "next/head"
-import {FaShoppingCart} from "react-icons/fa"
-import styles from '@/styles/Cart.module.css'
+import Head from "next/head";
+import {FaShoppingCart} from "react-icons/fa";
+import styles from "@/styles/Cart.module.css";
 
 import Table from "@/components/Table/Table";
 
 import {useCartContext} from "@/hooks/use-cart";
 
-import products from "../products.json"
-import Quantity from "@/components/Quantity/Quantity";
+import products from "../products.json";
+import QuantityInput from "@/components/QuantityInput/QuantityInput";
 
 const headers = [
     {
@@ -16,7 +16,7 @@ const headers = [
     },
     {
         headerId: "quantity",
-        headerName: "Quantity"
+        headerName: "QuantityInput"
     },
     {
         headerId: "pricePerUnit",
@@ -26,24 +26,29 @@ const headers = [
         headerId: "total",
         headerName: "Item Total"
     }
-]
+];
 
 export default function Cart() {
-    const {cartItems, checkout, updateItem} = useCartContext();
+    // const {cart, cartItems, checkout, updateItem} = useCartContext();
+    const {cart, checkout, updateItem} = useCartContext();
 
-    console.log("cartItems", cartItems);
+    console.log("cart", cart);
+    // console.log("cartItems", cartItems);
 
-    const data = cartItems.map(({id, title, quantity, pricePerUnit}) => {
+    // const data = cartItems.map(({id, title, quantity, pricePerUnit}) => {
+    const data = Object.values(cart.products).map(({id, title, price, quantity}) => {
         // const product = products.find(({id}) => id === item.id)
         // const {title} = product || {};
         return {
             id,
             title,
-            quantity: <Quantity id={id} quantity={quantity} updateItem={updateItem}/>,
-            pricePerUnit: pricePerUnit.toFixed(2),
-            total: (quantity * pricePerUnit).toFixed(2)
-        }
-    })
+            quantity: <QuantityInput id={id} quantity={quantity} updateItem={updateItem}/>,
+            // pricePerUnit: pricePerUnit.toFixed(2),
+            pricePerUnit: price.toFixed(2),
+            // total: (quantity * pricePerUnit).toFixed(2)
+            total: (quantity * price).toFixed(2)
+        };
+    });
 
     return (
         <div className={styles.container}>
@@ -69,5 +74,5 @@ export default function Cart() {
             <footer className={styles.footer}>
             </footer>
         </div>
-    )
+    );
 }

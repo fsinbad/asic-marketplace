@@ -1,4 +1,4 @@
-import styles from "@/components/Nav/Nav.module.css"
+import styles from "@/components/Nav/Nav.module.css";
 import {FaShoppingCart} from "react-icons/fa";
 import {useCartContext} from "@/hooks/use-cart";
 import Link from "next/link";
@@ -10,12 +10,12 @@ export default function Nav() {
     return (
         <nav className={styles.nav}>
             <p className={styles.navTitle}>
-                <Link href="/">Android Marketplace</Link>
+                <Link href="/">ASIC Marketplace</Link>
             </p>
             <p className={styles.navCart}>
                 <Link href="/cart">
                     <FaShoppingCart/> ${subtotal.toFixed(2)}
                 </Link>
             </p>
-        </nav>)
+        </nav>);
 }

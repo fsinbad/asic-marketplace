@@ -1,23 +1,23 @@
 [
   {
     "id": "id 1",
-    "title": "Android Phone 1",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    "image": "",
-    "price": 1
+    "title": "ASIC Miner 1",
+    "description": "Lorem ipsum dolor sit amet, consect adipis elit.",
+    "image": "/images/asic_miner_1.jpeg",
+    "price": 10.00
   },
   {
     "id": "id 2",
-    "title": "Android Phone 2",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    "image": "",
-    "price": 2
+    "title": "ASIC Miner 2",
+    "description": "Lorem ipsum dolor sit amet, consect adipis elit.",
+    "image": "/images/asic_miner_2.jpeg",
+    "price": 20.00
   },
   {
     "id": "id 3",
-    "title": "Android Phone 3",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    "image": "",
-    "price": 3
+    "title": "ASIC Miner 3",
+    "description": "Lorem ipsum dolor sit amet, consect adipis elit.",
+    "image": "/images/asic_miner_3.jpeg",
+    "price": 30.00
   }
 ]
