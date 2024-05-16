@@ -1,6 +1,8 @@
 {
-  "name": "android-marketplace",
-  "version": "0.1.0",
+  "name": "asic-marketplace",
+  "version": "1.0.0",
+  "author": "Maximilien Fathi",
+  "license": "ISC",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,12 +11,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^6.6.1",
     "next": "^13.5.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0"
-  },
-  "devDependencies": {
-    "prettier": "2.8.7"
   }
 }

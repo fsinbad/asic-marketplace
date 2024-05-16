@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 1.5em;
+}
+
+.headerTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.headerCart {
+  margin: 0;
+}
+
+.headerCart button {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.headerCart svg {
+  margin-right: 0.5em;
+}
