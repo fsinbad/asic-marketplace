@@ -1,13 +1,14 @@
-import Link from "next/link";
+import { useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import Link from "next/link";
 
-import { useCartContext } from "@/hooks/use-cart";
 import styles from "@/components/Header/Header.module.css";
+import cartContext from "@/contexts/cart-context";
 
 //##############################################################################
 
 function Header() {
-  const { subtotal } = useCartContext();
+  const { subtotal } = useContext(cartContext);
 
   return (
     <nav className={styles.header}>

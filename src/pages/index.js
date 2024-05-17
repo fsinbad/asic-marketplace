@@ -1,69 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
-import Image from "next/image";
-// import { Inter } from 'next/font/google'
+// import Image from "next/image";
 
-import { useCartContext } from "@/hooks/use-cart";
-// import { addToCart } from "@/hooks/use-cart";
-import styles from "@/styles/Home.module.css";
-// import products from "@/products.json";
+import cartContext from "@/contexts/cart-context";
 import getProductsFromDB from "@/lib/databaseAPIdata";
-import { initiateCheckout } from "@/lib/payments";
-
-// const inter = Inter({ subsets: ['latin'] });
+import styles from "@/styles/Home.module.css";
 
 //##############################################################################
-// import clientPromise from "../lib/mongodb";
 
-// export const getServerSideProps = async () => {
-//   try {
-//     const client = await clientPromise;
-//     const db = client.db("products");
-//     const products_unserialized = await db
-//       .collection("products")
-//       .find({})
-//       .toArray();
-//     const products = products_unserialized.map((product) => {
-//       const { _id, ...rest } = product;
-//       const id = _id.toString();
-//       return { id, ...rest };
-//     });
-//     console.log(products);
-//     return {
-//       props: { products },
-//     };
-//   } catch (e) {
-//     console.error(e);
-//     return { props: { products: [] } };
-//   }
-// };
-
-// // Retrieves all products data from the database via our API handler.
-// async function getProductsFromDB() {
-//   try {
-//     console.log("index.js - FETCHING FROM THE DATABASE ...");
-//     let res = await fetch("http://localhost:3000/api/products");
-//     return await res.json();
-//   } catch (e) {
-//     console.error(e);
-//   }
-// }
-//##############################################################################
-
-export default function Home() {
+function Home() {
+  const { addToCart } = useContext(cartContext);
   const [productsFromDB, setProductsFromDB] = useState([]);
-  const { addToCart } = useCartContext();
 
+  // Fetches products data from the database and updates productsFromDB state accordingly.
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedProducts = await getProductsFromDB("index.js");
+      const fetchedProducts = await getProductsFromDB();
       setProductsFromDB(fetchedProducts);
     };
 
     fetchData();
   }, []);
+
+  //############################################################################
 
   return (
     <div className={styles.container}>
@@ -99,7 +59,6 @@ export default function Home() {
                   <button
                     className={styles.button}
                     onClick={() => {
-                      // addToCart({_id})
                       addToCart({ _id, title, price });
                     }}
                   >
@@ -116,3 +75,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

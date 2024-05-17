@@ -1,14 +1,10 @@
-if (!process.env.NEXT_PUBLIC_API_URI) {
-  throw new Error('Invalid/Missing environment variable: "PUBLIC_API_URI"');
-}
-
-const uri = process.env.NEXT_PUBLIC_API_URI;
-
-// Read all products data from the database via our API handler (products.js)
-async function getProductsFromDB(str) {
+// Reads all products data from the database via the API handler (in products.js).
+async function getProductsFromDB() {
   try {
-    console.log(`${str} - FETCHING FROM THE DATABASE ...`);
-    let res = await fetch(uri);
+    if (!process.env.NEXT_PUBLIC_API_URI) {
+      throw new Error('Invalid/Missing environment variable: "PUBLIC_API_URI"');
+    }
+    let res = await fetch(process.env.NEXT_PUBLIC_API_URI);
     return await res.json();
   } catch (e) {
     console.error(e);

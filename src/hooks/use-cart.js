@@ -1,18 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
-// import products from "@/products.json";
-import { initiateCheckout } from "@/lib/payments";
+import { useEffect, useState } from "react";
 
 //##############################################################################
 
-const defaultCart = {
-  products: {},
-};
-
-export const CartContext = createContext();
+const defaultCart = { products: {} };
 
 // Custom hook that maintains cart state.
-export function useCartState() {
+function useCartState() {
   const [cart, setCart] = useState(defaultCart);
 
   //############################################################################
@@ -38,18 +31,7 @@ export function useCartState() {
 
   //############################################################################
 
-  //   const cartItems = Object.keys(cart.products).map((key) => {
-  //     const product = products.find(({ id }) => `${id}` === `${key}`);
-  //     return {
-  //       ...cart.products[key],
-  //       pricePerUnit: product["price"],
-  //       title: product["title"],
-  //     };
-  //   });
-
-  //############################################################################
-
-  // const subtotal = cartItems.reduce((accumulator, {pricePerUnit, quantity}) => {
+  // Calculates the total cost of all products added to the cart.
   const subtotal = Object.values(cart.products).reduce(
     (accumulator, { price, quantity }) => {
       return accumulator + price * quantity;
@@ -59,28 +41,16 @@ export function useCartState() {
 
   //############################################################################
 
-  // const quantity = cartItems.reduce((accumulator, {quantity}) => {
-  const quantity = Object.values(cart.products).reduce(
-    (accumulator, { quantity }) => {
-      return accumulator + quantity;
-    },
-    0
-  );
-
-  //############################################################################
-
-  // function addToCart({id}) {
-  function addToCart({ id, title, price }) {
+  // Updates cart state by either adding a product to it or updating the quantity
+  // of an existing product.
+  function addToCart({ _id, title, price }) {
     setCart((prev) => {
       let cart = { ...prev };
-
-      if (cart.products[id]) {
-        cart.products[id].quantity = cart.products[id].quantity + 1;
+      if (cart.products[_id]) {
+        cart.products[_id].quantity = cart.products[_id].quantity + 1;
       } else {
-        // cart.products[id] = {id, title, price, quantity: 1}
-        cart.products[id] = { id, title, price, quantity: 1 };
+        cart.products[_id] = { _id, title, price, quantity: 1 };
       }
-
       return cart;
     });
     console.log("test - addToCart()", cart);
@@ -88,16 +58,15 @@ export function useCartState() {
 
   //############################################################################
 
-  function updateItem({ id, quantity }) {
+  // ???
+  function updateItem({ _id, quantity }) {
     setCart((prev) => {
       let cart = { ...prev };
-
-      if (cart.products[id]) {
-        cart.products[id].quantity = quantity;
+      if (cart.products[_id]) {
+        cart.products[_id].quantity = quantity;
       } else {
-        cart.products[id] = { id, quantity: 1 }; // update?
+        cart.products[_id] = { _id, quantity: 1 }; // update?
       }
-
       return cart;
     });
     console.log("test - updateItem()", cart);
@@ -105,19 +74,7 @@ export function useCartState() {
 
   //############################################################################
 
-  function checkout() {
-    initiateCheckout();
-  }
-
-  //############################################################################
-
-  // return {cart, cartItems, subtotal, quantity, addToCart, updateItem, checkout}
-  return { cart, subtotal, quantity, addToCart, updateItem, checkout };
+  return { cart, subtotal, addToCart, updateItem };
 }
 
-//##############################################################################
-
-// Custom hook that provides access to cart context to ease transfer of cart state data throughout the app.
-export function useCartContext() {
-  return useContext(CartContext);
-}
+export default useCartState;

@@ -1,15 +1,21 @@
-import { CartContext, useCartState } from "@/hooks/use-cart";
-import Nav from "@/components/Header/Header";
+import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import cartContext from "@/contexts/cart-context";
+import useCartState from "@/hooks/use-cart";
 import "@/styles/globals.css";
 
-export default function App({ Component, pageProps }) {
+//##############################################################################
+
+function App({ Component, pageProps }) {
   const cart = useCartState();
+
   return (
-    <CartContext.Provider value={cart}>
-      <Nav />
+    <cartContext.Provider value={cart}>
+      <Header />
       <Component {...pageProps} />
       <Footer />
-    </CartContext.Provider>
+    </cartContext.Provider>
   );
 }
+
+export default App;

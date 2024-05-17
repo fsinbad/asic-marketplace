@@ -1,5 +1,8 @@
 import clientPromise from "@/lib/mongodb";
 
+//##############################################################################
+
+// Fetches all products data from the database.
 async function handler(req, res) {
   try {
     const client = await clientPromise;
@@ -12,8 +15,3 @@ async function handler(req, res) {
 }
 
 export default handler;
-
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-// export default function handler(req, res) {
-//     res.status(200).json({name: 'John Doe'})
-// }

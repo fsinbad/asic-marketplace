@@ -1,22 +1,26 @@
+import { useContext } from "react";
 import Head from "next/head";
 
+import cartContext from "@/contexts/cart-context";
 import getProductsFromDB from "@/lib/databaseAPIdata";
-import { useCartContext } from "@/hooks/use-cart";
 import styles from "@/styles/Product.module.css";
 
 //##############################################################################
 
 let productsFromDB = [];
 
-// getProductsFromDB is used twice and that means 2 database calls each time we browse a product page - That is too much.
-// The if (!productsFromDB) part was tried but it breaks things as "product" becomes undefined!
-// So I commented it. Must find a solution though.
+/*
+TODO:
+getProductsFromDB is used twice and that means 2 database calls each time we browse a product page - That is too much.
+The if (!productsFromDB) part was tried but it breaks things as "product" becomes undefined!
+So I commented it. Must find a solution though.
+*/
 
 // Step 1
 // Loops through products to create static paths.
 export async function getStaticPaths() {
   // if (!productsFromDB)
-  productsFromDB = await getProductsFromDB("[productID].js (getStaticPaths)");
+  productsFromDB = await getProductsFromDB();
   const paths = productsFromDB.map((product) => {
     const { _id } = product;
     return { params: { productId: _id } };
@@ -32,7 +36,7 @@ export async function getStaticPaths() {
 // Gets params object from getStaticPaths().
 export async function getStaticProps({ params }) {
   // if (!productsFromDB)
-  productsFromDB = await getProductsFromDB("[productID].js (getStaticProps)");
+  productsFromDB = await getProductsFromDB();
   // Just like getStaticPaths(), getStaticProps() runs inside Node so following will appear in terminal not in browser.
   const product = productsFromDB.find(
     ({ _id }) => `${_id}` === `${params.productId}`
@@ -46,19 +50,17 @@ export async function getStaticProps({ params }) {
 
 //##############################################################################
 
+/*
+TODO:
+FUNCTION RUNS TWICE WHEN LOADING PAGE (EXCEPTION WHEN CLICKING PRODUCT LINK IN HOME PAGE).
+MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-rendering?
+*/
 // Step 3
 // Fills static page with dynamic product data.
 // Gets product object from getStaticProps().
-/*
-TODO:
-    FUNCTION RUNS TWICE WHEN LOADING PAGE (EXCEPTION WHEN CLICKING PRODUCT LINK IN HOME PAGE).
-    MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-rendering?
-*/
-export default function Product({ product }) {
-  console.log("product", product);
-
+function Product({ product }) {
   const { _id, title, description, image, price } = product;
-  const { addToCart } = useCartContext();
+  const { addToCart } = useContext(cartContext);
 
   return (
     <div className={styles.container}>
@@ -76,7 +78,6 @@ export default function Product({ product }) {
           <p className={styles.productDescription}>{description}</p>
           <p className={styles.productPrice}>${price.toFixed(2)}</p>
           <p>
-            {/*<button className={styles.button} onClick={() => addToCart({id})}>*/}
             <button
               className={styles.button}
               onClick={() => addToCart({ _id, title, price })}
@@ -91,3 +92,5 @@ export default function Product({ product }) {
     </div>
   );
 }
+
+export default Product;
