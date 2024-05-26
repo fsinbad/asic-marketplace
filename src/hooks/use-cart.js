@@ -41,40 +41,64 @@ function useCartState() {
 
   //############################################################################
 
+  // Calculates the quantity of all items added to the cart.
+  const quantity = Object.values(cart.products).reduce(
+    (accumulator, { quantity }) => {
+      return accumulator + quantity;
+    },
+    0
+  );
+
+  //############################################################################
+
   // Updates cart state by either adding a product to it or updating the quantity
   // of an existing product.
-  function addToCart({ _id, title, price }) {
+  function addToCart({ _id, title, image, price }) {
     setCart((prev) => {
       let cart = { ...prev };
       if (cart.products[_id]) {
         cart.products[_id].quantity = cart.products[_id].quantity + 1;
       } else {
-        cart.products[_id] = { _id, title, price, quantity: 1 };
+        cart.products[_id] = { _id, title, image, price, quantity: 1 };
       }
       return cart;
     });
-    console.log("test - addToCart()", cart);
   }
 
   //############################################################################
 
-  // ???
-  function updateItem({ _id, quantity }) {
+  // Updates cart state by lowering the quantity of an existing product.
+  function removeFromCart({ _id }) {
     setCart((prev) => {
       let cart = { ...prev };
-      if (cart.products[_id]) {
-        cart.products[_id].quantity = quantity;
-      } else {
-        cart.products[_id] = { _id, quantity: 1 }; // update?
-      }
+      if (cart.products[_id].quantity > 1)
+        cart.products[_id].quantity = cart.products[_id].quantity - 1;
       return cart;
     });
-    console.log("test - updateItem()", cart);
   }
 
   //############################################################################
 
-  return { cart, subtotal, addToCart, updateItem };
+  // Updates cart state by removing a product completely from the cart.
+  function removeAllFromCart({ _id }) {
+    setCart((prev) => {
+      let cart = { ...prev };
+      delete cart.products[_id];
+      return cart;
+    });
+    console.log("test - removeFromCart()", cart);
+  }
+
+  //############################################################################
+
+  return {
+    cart,
+    subtotal,
+    quantity,
+    addToCart,
+    removeFromCart,
+    removeAllFromCart,
+  };
 }
 
 export default useCartState;

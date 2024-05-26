@@ -2,28 +2,77 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em 1.5em;
+  padding: 1.2rem 2.4rem;
+
+  /* border: 3px solid red; */
 }
 
-.headerTitle {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0;
-}
+/*############################################################################*/
 
-.headerCart {
-  margin: 0;
-}
-
-.headerCart button {
+.brand {
+  font-size: 1.8rem;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  font-size: 1.2em;
-  background: none;
-  padding: 0;
-  border: 0;
+  gap: 0.4rem;
 }
 
-.headerCart svg {
-  margin-right: 0.5em;
+.brandLogo {
+  color: #ff7300;
+  font-size: 3rem;
+  /* width: 3.2rem;
+  height: auto; */
+  /* color: rgb(223, 161, 243);
+  color: #f5671b;
+  height: 3.2rem;
+  width: 3.2rem;
+  pointer-events: none; */
+}
+
+/*############################################################################*/
+
+.cartLink {
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cartLink:hover {
+  color: #edb88d;
+  transition: all 0.5s;
+}
+
+/*############################################################################*/
+
+@media (max-width: 650px) {
+  .header {
+    padding: 1.2rem;
+  }
+
+  .brand {
+    font-size: 1.6rem;
+  }
+
+  .brandLogo {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .cartLabel {
+    display: none;
+  }
+
+  .brandName {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .brandName {
+    font-size: 1.4rem;
+  }
 }

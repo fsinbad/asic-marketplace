@@ -1,19 +1,30 @@
-.cartQuantity input {
-  width: 5em;
-  padding: 0.45em;
+.cartQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
 }
 
-.cartQuantity button {
-  font-size: 0.6em;
-  margin-left: 1em;
-  /*common code - put elsewhere*/
-  color: white;
-  font-family: inherit;
-  font-weight: 700;
-  background-color: blueviolet;
-  padding: 0.8em 1.4em;
-  border-radius: 0.2em;
-  border: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+.updateButton {
+  color: rgba(204, 204, 204, 0.823);
+  font-size: 1.6rem;
   cursor: pointer;
 }
+
+.updateButton:hover {
+  color: white;
+  transition: all 0.5s;
+}
+
+/*############################################################################*/
+
+/* @media (max-width: 800px) {
+  .cartQuantity {
+    gap: 0.8rem;
+    font-size: 1.4rem;
+  }
+
+  .updateButton {
+    font-size: 1.4rem;
+  }
+} */

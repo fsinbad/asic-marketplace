@@ -1,6 +1,12 @@
 import { useContext } from "react";
+import { MdElectricBolt } from "react-icons/md";
+import { MdOutlineMemory } from "react-icons/md";
+import { MdHearing } from "react-icons/md";
+import { MdMonitorWeight } from "react-icons/md";
 import Head from "next/head";
+import Link from "next/link";
 
+import QuantityInput from "@/components/QuantityInput/QuantityInput";
 import cartContext from "@/contexts/cart-context";
 import getProductsFromDB from "@/lib/databaseAPIdata";
 import styles from "@/styles/Product.module.css";
@@ -59,36 +65,73 @@ MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-renderin
 // Fills static page with dynamic product data.
 // Gets product object from getStaticProps().
 function Product({ product }) {
-  const { _id, title, description, image, price } = product;
+  const {
+    _id,
+    title,
+    description,
+    image,
+    power,
+    hashrate,
+    noise,
+    weight,
+    price,
+  } = product;
   const { addToCart } = useContext(cartContext);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageContainer}>
       <Head>
         <title>{`${title} - ASIC Marketplace`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main className={styles.mainContainer}>
         <div className={styles.productLeftSide}>
-          <img src={image} alt={title} />
+          <img className={styles.productImage} src={image} alt={title} />
         </div>
         <div className={styles.productRightSide}>
           <h1 className={styles.productTitle}>{title}</h1>
-          <p className={styles.productDescription}>{description}</p>
+          <div className={styles.productDescription}>{description}</div>
+          <div className={styles.productSpecsContainer}>
+            <div className={styles.productSpec}>
+              <p className={styles.productSpecLabel}>Power</p>
+              <p className={styles.productSpecValue}>
+                <MdElectricBolt /> {power} W
+              </p>
+            </div>
+            <div className={styles.productSpec}>
+              <p className={styles.productSpecLabel}>Hashrate</p>
+              <p className={styles.productSpecValue}>
+                <MdOutlineMemory /> {hashrate} TH/s
+              </p>
+            </div>
+            <div className={styles.productSpec}>
+              <p className={styles.productSpecLabel}>Noise</p>
+              <p className={styles.productSpecValue}>
+                <MdHearing /> {noise} db
+              </p>
+            </div>
+            <div className={styles.productSpec}>
+              <p className={styles.productSpecLabel}>Weight</p>
+              <p className={styles.productSpecValue}>
+                <MdMonitorWeight /> {weight} g
+              </p>
+            </div>
+          </div>
           <p className={styles.productPrice}>${price.toFixed(2)}</p>
-          <p>
+          <div className={styles.buttonsContainer}>
             <button
-              className={styles.button}
-              onClick={() => addToCart({ _id, title, price })}
+              className={styles.purchaseButton}
+              onClick={() => addToCart({ _id, title, image, price })}
             >
-              Buy
+              Add to Cart
             </button>
-          </p>
+            <Link className={styles.cartLink} href={`/cart`}>
+              Go To Cart
+            </Link>
+          </div>
         </div>
       </main>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }

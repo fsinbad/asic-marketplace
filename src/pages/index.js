@@ -1,4 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import { MdElectricBolt } from "react-icons/md";
+import { MdOutlineMemory } from "react-icons/md";
+import { FaShoppingCart } from "react-icons/fa";
 import Head from "next/head";
 import Link from "next/link";
 // import Image from "next/image";
@@ -26,52 +29,52 @@ function Home() {
   //############################################################################
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageContainer}>
       <Head>
-        <title>ASIC Trading Platform | ASIC marketplace</title>
+        <title>Home Page | ASIC marketplace</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        {/*Was not there initially, keep it?*/}
+      <main className={styles.mainContainer}>
         <h1 className={styles.title}>
-          {/*Your path to cryptocurrency wealth starts now!*/}
-          Some Title
+          <span>Mine</span> with Cutting-Edge ASICs and <span>Forge</span> your
+          Crypto Future
         </h1>
-
         <p className={styles.description}>
-          Find the perfect ASIC hardware for your mining needs and stay ahead of
-          the competition.
+          Shape your cryptocurrency destiny. Explore high-performance ASIC
+          miners and start mining the future today.
         </p>
-
-        <ul className={styles.grid}>
+        <p className={styles.listTitle}>Featured Products</p>
+        <ul className={styles.productsList}>
           {productsFromDB.map((product) => {
-            const { _id, title, description, image, price } = product;
+            const { _id, title, image, power, hashrate, price } = product;
             return (
               <li key={_id} className={styles.card}>
-                <Link href={`/products/${_id}`}>
-                  <img src={image} alt={title} />
-                  <h3>{title}</h3>
-                  <p>${price.toFixed(2)}</p>
-                  <p>{description}</p>
+                <Link className={styles.cardLink} href={`/products/${_id}`}>
+                  <img className={styles.cardImage} src={image} alt={title} />
+                  <div className={styles.cardSpecs}>
+                    <div>
+                      <MdElectricBolt /> {power} W
+                    </div>
+                    <div>
+                      <MdOutlineMemory /> {hashrate} TH/s
+                    </div>
+                  </div>
+                  <h3 className={styles.cardName}>{title}</h3>
+                  <div className={styles.cardPurchaseInfo}>
+                    <div className={styles.cardPurchaseValue}>
+                      ${price.toFixed(2)}
+                    </div>
+                    <div className={styles.cardPurchaseAction}>
+                      <FaShoppingCart />
+                    </div>
+                  </div>
                 </Link>
-                <p>
-                  <button
-                    className={styles.button}
-                    onClick={() => {
-                      addToCart({ _id, title, price });
-                    }}
-                  >
-                    Buy
-                  </button>
-                </p>
               </li>
             );
           })}
         </ul>
       </main>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }

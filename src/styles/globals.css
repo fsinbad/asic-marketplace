@@ -73,17 +73,42 @@
 /*  }*/
 /*}*/
 
+/* :root {
+  --color-options: #1e90ff;
+
+  --color-brand--1: #ffb545;
+  --color-brand--2: #00c46a;
+  --color-brand--2--dark: #00894a;
+
+  --color-dark--1: #2d3439;
+  --color-dark--2: #42484d;
+  --color-light--1: #aaa;
+  --color-light--2: #ececec;
+  --color-light--3: #d6dee0;
+  --color-light--4: #ffffff;
+} */
+
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-    /*max-width: 100vw;*/
-    /*overflow-x: hidden;*/
-    font-family: 'Roboto', sans-serif;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  /*max-width: 100vw;*/
+  /*overflow-x: hidden;*/
+  /* background: #444a8d; */
+  background-image: url(/images/vector-mar-2021-50_generated.jpg);
+  background-size: cover;
+
+  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
 }
 
 /*body {*/
@@ -97,12 +122,6 @@ body {
 /*}*/
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
-
-/*@media (prefers-color-scheme: dark) {*/
-/*  html {*/
-/*    color-scheme: dark;*/
-/*  }*/
-/*}*/
