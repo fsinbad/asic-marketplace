@@ -38,6 +38,7 @@ export async function getStaticPaths() {
 }
 
 // Step 2
+// "getStaticProps always runs on the server and never on the client."
 // Returns product data using specific product ID found in path.
 // Gets params object from getStaticPaths().
 export async function getStaticProps({ params }) {
@@ -47,6 +48,7 @@ export async function getStaticProps({ params }) {
   const product = productsFromDB.find(
     ({ _id }) => `${_id}` === `${params.productId}`
   );
+  console.log("product is", product._id);
   return {
     props: {
       product,
@@ -67,7 +69,7 @@ MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-renderin
 function Product({ product }) {
   const {
     _id,
-    title,
+    name,
     description,
     image,
     power,
@@ -81,16 +83,16 @@ function Product({ product }) {
   return (
     <div className={styles.pageContainer}>
       <Head>
-        <title>{`${title} - ASIC Marketplace`}</title>
+        <title>{`${name} - ASIC Marketplace`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.mainContainer}>
         <div className={styles.productLeftSide}>
-          <img className={styles.productImage} src={image} alt={title} />
+          <img className={styles.productImage} src={image} alt={name} />
         </div>
         <div className={styles.productRightSide}>
-          <h1 className={styles.productTitle}>{title}</h1>
+          <h1 className={styles.productName}>{name}</h1>
           <div className={styles.productDescription}>{description}</div>
           <div className={styles.productSpecsContainer}>
             <div className={styles.productSpec}>
@@ -122,7 +124,7 @@ function Product({ product }) {
           <div className={styles.buttonsContainer}>
             <button
               className={styles.purchaseButton}
-              onClick={() => addToCart({ _id, title, image, price })}
+              onClick={() => addToCart({ _id, name, image, price })}
             >
               Add to Cart
             </button>

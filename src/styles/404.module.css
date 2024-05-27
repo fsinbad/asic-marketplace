@@ -1,0 +1,92 @@
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  padding-bottom: 100px;
+  /* border: 3px solid red; */
+  height: fit-content;
+}
+
+.mainContainer {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  /* flex: 1; */
+  /* gap: 1.6rem; */
+  align-items: center;
+  justify-content: center;
+  /* border: 3px solid yellow; */
+}
+
+/*############################################################################*/
+
+.errorImage {
+  height: 36rem;
+  /* border: 3px solid green; */
+}
+
+.goBackButton {
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 700;
+  /* background-color: rgb(255, 115, 0); */
+  background-color: #ff730037;
+  padding: 1.2rem 2.4rem;
+  border: 3px solid #ff7300;
+  border-radius: 11px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  flex-basis: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.goBackButton:hover {
+  background-color: #edb88d;
+  transition: all 0.5s;
+}
+
+/*############################################################################*/
+
+@media (max-width: 650px) {
+  .errorImage {
+    height: 30rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .errorImage {
+    height: 24rem;
+  }
+
+  .goBackButton {
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .errorImage {
+    height: 18rem;
+  }
+
+  .goBackButton {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .errorImage {
+    height: 16rem;
+  }
+
+  .goBackButton {
+    font-size: 0.8rem;
+  }
+}

@@ -37,7 +37,7 @@
   /* text-align: center; */
 }
 
-.productTitle {
+.productName {
   font-size: 3rem;
   margin-bottom: 1.6rem;
 }
@@ -106,7 +106,7 @@
   font-family: inherit;
   font-size: 1.6rem;
   font-weight: 700;
-  background-color: #ff7300;
+  background-color: rgb(255, 115, 0);
   padding: 1.2rem 2.4rem;
   border: 3px solid #ff7300;
   border-radius: 11px;

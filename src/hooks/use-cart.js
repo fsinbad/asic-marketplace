@@ -53,13 +53,13 @@ function useCartState() {
 
   // Updates cart state by either adding a product to it or updating the quantity
   // of an existing product.
-  function addToCart({ _id, title, image, price }) {
+  function addToCart({ _id, name, image, price }) {
     setCart((prev) => {
       let cart = { ...prev };
       if (cart.products[_id]) {
         cart.products[_id].quantity = cart.products[_id].quantity + 1;
       } else {
-        cart.products[_id] = { _id, title, image, price, quantity: 1 };
+        cart.products[_id] = { _id, name, image, price, quantity: 1 };
       }
       return cart;
     });

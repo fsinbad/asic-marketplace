@@ -48,20 +48,20 @@ function Cart() {
 
   // Gathers all data needed to be displayed in the cart table.
   const data = Object.values(cart.products).map(
-    ({ _id, title, image, price, quantity }) => {
+    ({ _id, name, image, price, quantity }) => {
       return {
         _id,
         info: (
           <div className={styles.productInfo}>
             <Link className={styles.productLink} href={"/products/" + _id}>
-              <p className={styles.productName}>{title}</p>
+              <p className={styles.productName}>{name}</p>
             </Link>
             <p className={styles.productPrice}>{"$" + price.toFixed(2)}</p>
           </div>
         ),
         image: (
           <Link className={styles.productLink} href={"/products/" + _id}>
-            <img className={styles.productImage} src={image} alt={title} />
+            <img className={styles.productImage} src={image} alt={name} />
           </Link>
         ),
         quantity: (
@@ -120,7 +120,9 @@ function Cart() {
               <h2 className={styles.orderSummaryTitle}>Order Summary</h2>
               <div className={styles.orderSummaryGrid}>
                 <div className={styles.orderSummaryLabel}>Subtotal</div>
-                <div className={styles.orderSummaryValue}>${subtotal}</div>
+                <div className={styles.orderSummaryValue}>
+                  ${subtotal.toFixed(2)}
+                </div>
                 <div className={styles.orderSummaryLabel}>Tax (15%)</div>
                 <div className={styles.orderSummaryValue}>${tax}</div>
                 <div className={styles.orderSummaryLabel}>Shipping</div>

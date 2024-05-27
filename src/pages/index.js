@@ -47,11 +47,11 @@ function Home() {
         <p className={styles.listTitle}>Featured Products</p>
         <ul className={styles.productsList}>
           {productsFromDB.map((product) => {
-            const { _id, title, image, power, hashrate, price } = product;
+            const { _id, name, image, power, hashrate, price } = product;
             return (
               <li key={_id} className={styles.card}>
                 <Link className={styles.cardLink} href={`/products/${_id}`}>
-                  <img className={styles.cardImage} src={image} alt={title} />
+                  <img className={styles.cardImage} src={image} alt={name} />
                   <div className={styles.cardSpecs}>
                     <div>
                       <MdElectricBolt /> {power} W
@@ -60,7 +60,7 @@ function Home() {
                       <MdOutlineMemory /> {hashrate} TH/s
                     </div>
                   </div>
-                  <h3 className={styles.cardName}>{title}</h3>
+                  <h3 className={styles.cardName}>{name}</h3>
                   <div className={styles.cardPurchaseInfo}>
                     <div className={styles.cardPurchaseValue}>
                       ${price.toFixed(2)}
