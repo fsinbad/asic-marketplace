@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 
 const defaultCart = { products: {} };
 
-// Custom hook that maintains cart state.
+// Custom hook that maintains the cart state.
 function useCartState() {
   const [cart, setCart] = useState(defaultCart);
+  const taxPercentage = 15;
 
   //############################################################################
 
-  // Gets cart data from localStorage each time the page is loaded.
+  // Retrieve cart data from localStorage each time the page is loaded.
   useEffect(() => {
     const stateFromStorage = window.localStorage.getItem(
       "asic_marketplace_cart"
@@ -23,7 +24,7 @@ function useCartState() {
 
   //############################################################################
 
-  // Stores cart data in localStorage each time the cart state is updated.
+  // Store cart data in localStorage each time the cart state is updated.
   useEffect(() => {
     const data = JSON.stringify(cart);
     window.localStorage.setItem("asic_marketplace_cart", data);
@@ -31,17 +32,7 @@ function useCartState() {
 
   //############################################################################
 
-  // Calculates the total cost of all products added to the cart.
-  const subtotal = Object.values(cart.products).reduce(
-    (accumulator, { price, quantity }) => {
-      return accumulator + price * quantity;
-    },
-    0
-  );
-
-  //############################################################################
-
-  // Calculates the quantity of all items added to the cart.
+  // Calculate quantity of all items added to the cart.
   const quantity = Object.values(cart.products).reduce(
     (accumulator, { quantity }) => {
       return accumulator + quantity;
@@ -51,8 +42,28 @@ function useCartState() {
 
   //############################################################################
 
-  // Updates cart state by either adding a product to it or updating the quantity
-  // of an existing product.
+  // Calculate total cost of all products added to the cart (prior taxes).
+  const subtotal = Object.values(cart.products).reduce(
+    (accumulator, { price, quantity }) => {
+      return accumulator + price * quantity;
+    },
+    0
+  );
+
+  //############################################################################
+
+  // Calculate total tax value to be added to subtotal.
+  const taxCost = (taxPercentage / 100) * subtotal;
+
+  //############################################################################
+
+  // Calculate total cost of all products added to the cart (after taxes).
+  const grandTotal = subtotal + taxCost;
+
+  //############################################################################
+
+  // Update cart state by either increasing the quantity of an existing product
+  // in the cart or adding a new product to it.
   function addToCart({ _id, name, image, price }) {
     setCart((prev) => {
       let cart = { ...prev };
@@ -67,7 +78,7 @@ function useCartState() {
 
   //############################################################################
 
-  // Updates cart state by lowering the quantity of an existing product.
+  // Update cart state by decreasing the quantity of an existing product in the cart.
   function removeFromCart({ _id }) {
     setCart((prev) => {
       let cart = { ...prev };
@@ -79,22 +90,23 @@ function useCartState() {
 
   //############################################################################
 
-  // Updates cart state by removing a product completely from the cart.
+  // Update cart state by completely removing a product from the cart.
   function removeAllFromCart({ _id }) {
     setCart((prev) => {
       let cart = { ...prev };
       delete cart.products[_id];
       return cart;
     });
-    console.log("test - removeFromCart()", cart);
   }
 
   //############################################################################
 
   return {
     cart,
-    subtotal,
     quantity,
+    subtotal,
+    taxCost,
+    grandTotal,
     addToCart,
     removeFromCart,
     removeAllFromCart,

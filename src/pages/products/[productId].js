@@ -1,33 +1,27 @@
 import { useContext } from "react";
-import { MdElectricBolt } from "react-icons/md";
-import { MdOutlineMemory } from "react-icons/md";
-import { MdHearing } from "react-icons/md";
-import { MdMonitorWeight } from "react-icons/md";
+import {
+  MdElectricBolt,
+  MdHearing,
+  MdMonitorWeight,
+  MdOutlineMemory,
+} from "react-icons/md";
 import Head from "next/head";
 import Link from "next/link";
 
-import QuantityInput from "@/components/QuantityInput/QuantityInput";
 import cartContext from "@/contexts/cart-context";
-import getProductsFromDB from "@/lib/databaseAPIdata";
-import styles from "@/styles/Product.module.css";
+import getDataFromApiUri from "@/lib/api-data";
+import styles from "@/styles/product.module.css";
 
 //##############################################################################
 
-let productsFromDB = [];
-
-/*
-TODO:
-getProductsFromDB is used twice and that means 2 database calls each time we browse a product page - That is too much.
-The if (!productsFromDB) part was tried but it breaks things as "product" becomes undefined!
-So I commented it. Must find a solution though.
-*/
+let productsArray = [];
 
 // Step 1
-// Loops through products to create static paths.
+// Loop through products to create static paths for each of them.
 export async function getStaticPaths() {
-  // if (!productsFromDB)
-  productsFromDB = await getProductsFromDB();
-  const paths = productsFromDB.map((product) => {
+  // if (!productsArray)
+  productsArray = await getDataFromApiUri();
+  const paths = productsArray.map((product) => {
     const { _id } = product;
     return { params: { productId: _id } };
   });
@@ -38,16 +32,16 @@ export async function getStaticPaths() {
 }
 
 // Step 2
-// "getStaticProps always runs on the server and never on the client."
-// Returns product data using specific product ID found in path.
-// Gets params object from getStaticPaths().
+// Return product data using specific product ID found in path.
+// Note - "params" object comes from getStaticPaths().
+// Note - "getStaticProps always runs on the server and never on the client."
 export async function getStaticProps({ params }) {
-  // if (!productsFromDB)
-  productsFromDB = await getProductsFromDB();
-  // Just like getStaticPaths(), getStaticProps() runs inside Node so following will appear in terminal not in browser.
-  const product = productsFromDB.find(
+  // if (!productsArray)
+  productsArray = await getDataFromApiUri();
+  const product = productsArray.find(
     ({ _id }) => `${_id}` === `${params.productId}`
   );
+  // getStaticProps() runs inside Node so following will appear in terminal not in browser.
   console.log("product is", product._id);
   return {
     props: {
@@ -58,14 +52,9 @@ export async function getStaticProps({ params }) {
 
 //##############################################################################
 
-/*
-TODO:
-FUNCTION RUNS TWICE WHEN LOADING PAGE (EXCEPTION WHEN CLICKING PRODUCT LINK IN HOME PAGE).
-MAYBE THE REASON IS IN https://nextjs.org/docs/basic-features/pages#pre-rendering?
-*/
 // Step 3
-// Fills static page with dynamic product data.
-// Gets product object from getStaticProps().
+// Fill product page with specific data from getStaticProps().
+// Note - "product" object comes from getStaticProps().
 function Product({ product }) {
   const {
     _id,
@@ -83,8 +72,15 @@ function Product({ product }) {
   return (
     <div className={styles.pageContainer}>
       <Head>
+        <meta
+          name="description"
+          content="ASIC Marketplace is your one-stop shop to find the perfect 
+          ASIC miner and unlock your crypto mining potential."
+        />
         <title>{`${name} - ASIC Marketplace`}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="manifest" href="manifest.webmanifest" />
       </Head>
 
       <main className={styles.mainContainer}>

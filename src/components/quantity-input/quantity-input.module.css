@@ -1,0 +1,16 @@
+.cartQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.updateButton {
+  color: #ccccccd2;
+  font-size: 1.6rem;
+}
+
+.updateButton:hover {
+  color: #fff;
+  transition: all 0.5s;
+}

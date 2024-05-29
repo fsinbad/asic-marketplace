@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 import cartContext from "@/contexts/cart-context";
 import useCartState from "@/hooks/use-cart";
 import "@/styles/globals.css";

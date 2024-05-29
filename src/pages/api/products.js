@@ -2,7 +2,7 @@ import clientPromise from "@/lib/mongodb";
 
 //##############################################################################
 
-// Fetches all products data from the database.
+// Retrieve all "products" data from the database.
 async function handler(req, res) {
   try {
     const client = await clientPromise;

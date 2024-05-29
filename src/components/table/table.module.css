@@ -1,0 +1,94 @@
+.table {
+  width: 100%;
+  border-spacing: 0 1.6rem;
+  border-collapse: separate;
+  text-align: center;
+  font-size: 1.6rem;
+  height: fit-content;
+}
+
+.table tr {
+  box-shadow: 0 0 6px 1px #00000066;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.table td {
+  padding: 0.8rem;
+  background: #bebebe4d;
+}
+
+.table td:first-child {
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
+  padding: 0.8rem;
+}
+
+.table td:nth-child(3) {
+  min-width: 150px;
+  padding-right: 0;
+}
+
+.table td:nth-child(4) {
+  min-width: 150px;
+  padding-left: 0;
+}
+
+.table td:last-child {
+  border-bottom-right-radius: 11px;
+  border-top-right-radius: 11px;
+  width: 0.1%;
+  background-color: #ba1212;
+  cursor: pointer;
+}
+
+.table td:last-child:hover {
+  background-color: #d67171;
+  transition: all 0.5s;
+}
+
+/*############################################################################*/
+
+@media (max-width: 800px) {
+  .mainContainer {
+    width: 70rem;
+  }
+
+  .table tbody td:nth-child(2),
+  .table tbody td:nth-child(3),
+  .table tbody td:nth-child(4) {
+    min-width: fit-content;
+  }
+
+  .table td:nth-child(3) {
+    padding-right: 0.8rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .table td {
+    display: block;
+  }
+
+  .table td::before {
+    float: left;
+  }
+
+  .table td:first-child {
+    background-color: #bebebe28;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-left-radius: 0px;
+  }
+
+  .table td:nth-child(4) {
+    padding: 0.8rem;
+  }
+
+  .table td:last-child {
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-top-right-radius: 0px;
+    width: 100%;
+  }
+}

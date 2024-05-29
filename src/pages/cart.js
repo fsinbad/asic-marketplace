@@ -1,52 +1,48 @@
 import { useContext } from "react";
-import { MdKeyboardBackspace } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdKeyboardBackspace } from "react-icons/md";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import Table from "@/components/Table/Table";
-import QuantityInput from "@/components/QuantityInput/QuantityInput";
+import OrderSummary from "@/components/order-summary/order-summary";
+import QuantityInput from "@/components/quantity-input/quantity-input";
+import Table from "@/components/table/table";
 import cartContext from "@/contexts/cart-context";
-import styles from "@/styles/Cart.module.css";
-
-//##############################################################################
-
-const headers = [
-  {
-    headerId: "image",
-    headerName: "ITEM",
-  },
-  {
-    headerId: "info",
-    headerName: "",
-  },
-  {
-    headerId: "quantity",
-    headerName: "QUANTITY",
-  },
-  // {
-  //   headerId: "pricePerUnit",
-  //   headerName: "PRICE",
-  // },
-  {
-    headerId: "total",
-    headerName: "TOTAL",
-  },
-  {
-    headerId: "deleteIcon",
-    headerName: "",
-  },
-];
+import styles from "@/styles/cart.module.css";
 
 //##############################################################################
 
 function Cart() {
   const router = useRouter();
-  const { cart, subtotal, quantity, addToCart, removeFromCart } =
-    useContext(cartContext);
+  const { cart, quantity, addToCart, removeFromCart } = useContext(cartContext);
 
-  // Gathers all data needed to be displayed in the cart table.
+  // Array of objects containing info about table headers.
+  const headers = [
+    {
+      headerId: "image",
+      headerName: "ITEM",
+    },
+    {
+      headerId: "info",
+      headerName: "",
+    },
+    {
+      headerId: "quantity",
+      headerName: "QUANTITY",
+    },
+    {
+      headerId: "total",
+      headerName: "TOTAL",
+    },
+    {
+      headerId: "deleteIcon",
+      headerName: "",
+    },
+  ];
+
+  //############################################################################
+
+  // Gather all data needed to be displayed in the cart table.
   const data = Object.values(cart.products).map(
     ({ _id, name, image, price, quantity }) => {
       return {
@@ -72,39 +68,34 @@ function Cart() {
             removeFromCart={removeFromCart}
           />
         ),
-        // pricePerUnit: "$" + price.toFixed(2),
         total: "$" + (quantity * price).toFixed(2),
-        deleteIcon: (
-          <MdDeleteOutline
-            className={styles.deleteIcon}
-            _id={_id}
-            // onClick={() => removeAllFromCart({ _id: _id })}
-          />
-        ),
+        deleteIcon: <MdDeleteOutline className={styles.deleteIcon} _id={_id} />,
       };
     }
   );
 
-  const goBack = () => {
-    router.back(); // This navigates back to the previous page in the browser history
-  };
-
-  let tax = (0.15 * subtotal).toFixed(2);
-  let finalTotalPrice = (1.15 * subtotal).toFixed(2);
+  // Navigate back to the previous page in the browser history.
+  function goBack() {
+    router.back();
+  }
 
   //############################################################################
 
   return (
     <div className={styles.pageContainer}>
       <Head>
+        <meta
+          name="description"
+          content="ASIC Marketplace is your one-stop shop to find the perfect 
+          ASIC miner and unlock your crypto mining potential."
+        />
         <title>Shopping Cart - ASIC marketplace</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
 
-      <main
-        className={styles.mainContainer}
-        // style={{ flexDirection: quantity > 0 ? "row" : "column" }}
-      >
+      <main className={styles.mainContainer}>
         <div className={styles.titleContainer}>
           <button className={styles.goBackButton} onClick={goBack}>
             <MdKeyboardBackspace className={styles.goBackButtonIcon} />
@@ -115,33 +106,7 @@ function Cart() {
 
         <div className={styles.cartTableContainer}>
           <Table data={data} headers={headers} />
-          {quantity > 0 ? (
-            <div className={styles.orderSummaryContainer}>
-              <h2 className={styles.orderSummaryTitle}>Order Summary</h2>
-              <div className={styles.orderSummaryGrid}>
-                <div className={styles.orderSummaryLabel}>Subtotal</div>
-                <div className={styles.orderSummaryValue}>
-                  ${subtotal.toFixed(2)}
-                </div>
-                <div className={styles.orderSummaryLabel}>Tax (15%)</div>
-                <div className={styles.orderSummaryValue}>${tax}</div>
-                <div className={styles.orderSummaryLabel}>Shipping</div>
-                <div className={styles.orderSummaryValue}>free</div>
-              </div>
-              <div className={styles.totalPrice}>
-                <div className={styles.orderSummaryLabel}>Total</div>
-                <div className={styles.orderSummaryValue}>
-                  ${finalTotalPrice}
-                </div>
-              </div>
-              <button className={styles.checkoutButton}>Check Out</button>
-              <Link className={styles.homeLink} href="/">
-                Continue Shopping
-              </Link>
-            </div>
-          ) : (
-            <> </>
-          )}
+          {quantity > 0 ? <OrderSummary /> : <> </>}
         </div>
       </main>
     </div>

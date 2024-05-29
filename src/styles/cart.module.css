@@ -1,0 +1,162 @@
+.pageContainer {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContainer {
+  width: 80rem;
+  margin: 1.2rem;
+  padding: 1.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1.6rem;
+}
+
+/*############################################################################*/
+
+.cartTableContainer {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.titleContainer {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.goBackButton {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.goBackButtonIcon {
+  font-size: 2.4rem;
+}
+
+.goBackButtonIcon:hover {
+  color: #edb88d;
+  transition: all 0.5s;
+}
+
+.quantity {
+  font-size: 1.8rem;
+  color: #ccccccd2;
+}
+
+/*############################################################################*/
+
+.productLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImage {
+  box-shadow: 0 0 6px 1px #00000066;
+  height: 7.4rem;
+  border-radius: 11px;
+}
+
+.productInfo {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.productPrice {
+  font-size: 1.4rem;
+  color: #ccccccd2;
+}
+
+/*############################################################################*/
+
+@media (max-width: 1300px) {
+  .mainContainer {
+    width: 70rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mainContainer {
+    width: 60rem;
+  }
+
+  .cartTableContainer {
+    gap: 2.4rem;
+  }
+
+  .orderSummaryGrid {
+    column-gap: 1.6rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .mainContainer {
+    width: 50rem;
+  }
+
+  .cartTableContainer {
+    flex-direction: column;
+  }
+
+  .orderSummaryValue {
+    width: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .mainContainer {
+    width: 40rem;
+  }
+
+  .productInfo {
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .mainContainer {
+    width: 30rem;
+  }
+
+  .titleContainer {
+    justify-content: center;
+  }
+
+  .productInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 500px) {
+    .mainContainer {
+      width: 25rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .mainContainer {
+      width: 20rem;
+    }
+
+    .titleContainer {
+      font-size: 1rem;
+    }
+  }
+}

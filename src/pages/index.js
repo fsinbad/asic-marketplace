@@ -1,26 +1,20 @@
-import { useContext, useEffect, useState } from "react";
-import { MdElectricBolt } from "react-icons/md";
-import { MdOutlineMemory } from "react-icons/md";
-import { FaShoppingCart } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
-// import Image from "next/image";
 
-import cartContext from "@/contexts/cart-context";
-import getProductsFromDB from "@/lib/databaseAPIdata";
-import styles from "@/styles/Home.module.css";
+import ProductCard from "@/components/product-card/product-card.js";
+import getDataFromApiUri from "@/lib/api-data";
+import styles from "@/styles/home.module.css";
 
 //##############################################################################
 
 function Home() {
-  const { addToCart } = useContext(cartContext);
-  const [productsFromDB, setProductsFromDB] = useState([]);
+  const [productsArray, setProductsArray] = useState([]);
 
-  // Fetches products data from the database and updates productsFromDB state accordingly.
+  // Retrieve products data from the database via the API URI (see src/pages/api/products.js).
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedProducts = await getProductsFromDB();
-      setProductsFromDB(fetchedProducts);
+      const fetchedProducts = await getDataFromApiUri();
+      setProductsArray(fetchedProducts);
     };
 
     fetchData();
@@ -31,8 +25,18 @@ function Home() {
   return (
     <div className={styles.pageContainer}>
       <Head>
+        <meta
+          name="description"
+          content="ASIC Marketplace is your one-stop shop to find the perfect 
+          ASIC miner and unlock your crypto mining potential."
+        />
         <title>Home Page | ASIC marketplace</title>
+        {/* No need for "public/favicon.ico". The public directory in Next.js 
+        serves a specific purpose. Any file placed within this directory is 
+        copied directly into the root of your build output folder (usually out). */}
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
 
       <main className={styles.mainContainer}>
@@ -46,31 +50,17 @@ function Home() {
         </p>
         <p className={styles.listTitle}>Featured Products</p>
         <ul className={styles.productsList}>
-          {productsFromDB.map((product) => {
-            const { _id, name, image, power, hashrate, price } = product;
+          {productsArray.map((product) => {
             return (
-              <li key={_id} className={styles.card}>
-                <Link className={styles.cardLink} href={`/products/${_id}`}>
-                  <img className={styles.cardImage} src={image} alt={name} />
-                  <div className={styles.cardSpecs}>
-                    <div>
-                      <MdElectricBolt /> {power} W
-                    </div>
-                    <div>
-                      <MdOutlineMemory /> {hashrate} TH/s
-                    </div>
-                  </div>
-                  <h3 className={styles.cardName}>{name}</h3>
-                  <div className={styles.cardPurchaseInfo}>
-                    <div className={styles.cardPurchaseValue}>
-                      ${price.toFixed(2)}
-                    </div>
-                    <div className={styles.cardPurchaseAction}>
-                      <FaShoppingCart />
-                    </div>
-                  </div>
-                </Link>
-              </li>
+              <ProductCard
+                key={product._id}
+                _id={product._id}
+                name={product.name}
+                image={product.image}
+                power={product.power}
+                hashrate={product.hashrate}
+                price={product.price}
+              />
             );
           })}
         </ul>
