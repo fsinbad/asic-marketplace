@@ -78,7 +78,7 @@ function Product({ product }) {
           ASIC miner and unlock your crypto mining potential."
         />
         <title>{`${name} - ASIC Marketplace`}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
       </Head>

@@ -31,10 +31,10 @@ function Home() {
           ASIC miner and unlock your crypto mining potential."
         />
         <title>Home Page | ASIC marketplace</title>
-        {/* No need for "public/favicon.ico". The public directory in Next.js 
+        {/* No need for "public/images/favicon.ico". The public directory in Next.js 
         serves a specific purpose. Any file placed within this directory is 
         copied directly into the root of your build output folder (usually out). */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
