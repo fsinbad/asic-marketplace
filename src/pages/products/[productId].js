@@ -80,7 +80,7 @@ function Product({ product }) {
         <title>{`${name} - ASIC Marketplace`}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-        <link rel="manifest" href="manifest.webmanifest" />
+        <link rel="manifest" href="/manifest.webmanifest" />
       </Head>
 
       <main className={styles.mainContainer}>
