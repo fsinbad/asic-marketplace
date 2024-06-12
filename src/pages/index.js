@@ -26,6 +26,10 @@ function Home() {
     <div className={styles.pageContainer}>
       <Head>
         <meta
+          name="google-site-verification"
+          content="Yhbv7y6yCnRbJDr5k7alIAswHVaGdeUctNgmsFpG1Ao"
+        />
+        <meta
           name="description"
           content="ASIC Marketplace is your one-stop shop to find the perfect 
           ASIC miner and unlock your crypto mining potential."
