@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import cartContext from "@/contexts/cart-context";
@@ -12,6 +14,18 @@ function App({ Component, pageProps }) {
   return (
     <cartContext.Provider value={cart}>
       <Header />
+      {/* Google tag (gtag.js) */}
+      <Script
+        async
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-5EJERYVJV5"
+      ></Script>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5EJERYVJV5');`}
+      </Script>
       <Component {...pageProps} />
       <Footer />
     </cartContext.Provider>
