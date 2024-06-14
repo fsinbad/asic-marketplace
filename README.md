@@ -30,12 +30,13 @@ ASIC Marketplace should aim to meet the following objectives:
 - **Real-Time Order Summary:** Have access to a continuously updated order summary, reflecting any changes made to product quantities.
 - **Informative Error Handling:** Encounter a user-friendly error page when navigating to an incorrect path or nonexistent product.
 - **Device-Agnostic Functionality:** Enjoy a seamless user experience across all devices, facilitated by responsive design.
+- **Traffic Analysis & Optimization:** Have the website be indexed in the Google search engine and integrate Google Analytics to inspect website traffic.
 
 ### Screenshots
 
-![Image of the home page](/public/images/README_home_page.png)  
-![Image of a dedicated product page](/public/images/README_product_page.png)  
-![Image of the shopping cart page](/public/images/README_cart_page.png)
+![Image of the home page](/public/images/README-home-page.png)  
+![Image of a dedicated product page](/public/images/README-product-page.png)  
+![Image of the shopping cart page](/public/images/README-cart-page.png)
 
 ### Link
 
@@ -63,6 +64,8 @@ While working through this project, the major learnings involved:
 - The use of Static Site Generation features with Next.js to optimize performance and SEO.
 - The establishment of a connection between an application and a MongoDB database for persistent storage and retrieval.
 - The utilization of appropriate methods to retrieve data from a MongoDB database for dynamic content rendering.
+- The usage of Google Search Console to index a website on the Google search engine.
+- The integration of Google Analytics to track website traffic and user behavior to enable data-driven decisions.
 
 ### Continued development
 

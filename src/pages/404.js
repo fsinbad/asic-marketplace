@@ -30,7 +30,7 @@ function Custom404() {
       <main className={styles.mainContainer}>
         <img
           className={styles.errorImage}
-          src={"/images/Oops! 404 Error with a broken robot-rafiki.png"}
+          src={"/images/404-error-page-robot.png"}
           alt={"Robot Lost! Error 404"}
         />
         <button className={styles.goBackButton} onClick={goBack}>
