@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
@@ -29,6 +30,7 @@ function App({ Component, pageProps }) {
       </Script>
       <Component {...pageProps} />
       <Analytics />
+      <SpeedInsights />
       <Footer />
     </cartContext.Provider>
   );
