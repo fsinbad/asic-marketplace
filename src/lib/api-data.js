@@ -3,10 +3,7 @@
 // beforehand (see src/pages/api/products.js).
 async function getDataFromApiUri() {
   try {
-    const uri =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/products"
-        : "https://ma-fath-asic-marketplace.vercel.app/api/products";
+    const uri = `${process.env.NEXT_PUBLIC_BASE_API_URI}/api/products`;
     let res = await fetch(uri);
     return await res.json();
   } catch (e) {

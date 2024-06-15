@@ -11,6 +11,11 @@ import "@/styles/globals.css";
 function App({ Component, pageProps }) {
   const cart = useCartState();
 
+  // Ensure proper deployment to Vercel
+  if (!process.env.NEXT_PUBLIC_BASE_API_URI) {
+    return null;
+  }
+
   return (
     <cartContext.Provider value={cart}>
       <Header />

@@ -34,7 +34,7 @@ function Home() {
           content="ASIC Marketplace is your one-stop shop to find the perfect 
           ASIC miner and unlock your crypto mining potential."
         />
-        <title>Home Page | ASIC marketplace</title>
+        <title>Home Page - ASIC marketplace</title>
         {/* No need for "public/images/favicon.ico". The public directory in Next.js 
         serves a specific purpose. Any file placed within this directory is 
         copied directly into the root of your build output folder (usually out). */}
