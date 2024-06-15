@@ -42,6 +42,7 @@ export async function getStaticProps({ params }) {
     ({ _id }) => `${_id}` === `${params.productId}`
   );
   // getStaticProps() runs inside Node so following will appear in terminal not in browser.
+  // I.e. It runs in the server, not the client.
   console.log("product is", product._id);
   return {
     props: {

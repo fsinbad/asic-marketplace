@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
@@ -27,6 +28,7 @@ function App({ Component, pageProps }) {
         gtag('config', 'G-5EJERYVJV5');`}
       </Script>
       <Component {...pageProps} />
+      <Analytics />
       <Footer />
     </cartContext.Provider>
   );

@@ -3,10 +3,10 @@
 // beforehand (see src/pages/api/products.js).
 async function getDataFromApiUri() {
   try {
+    // Return empty array to avoid error the first time we deploy to Vercel
     if (!process.env.NEXT_PUBLIC_BASE_API_URI) {
       return [];
     }
-
     const uri = `${process.env.NEXT_PUBLIC_BASE_API_URI}/api/products`;
     let res = await fetch(uri);
     return await res.json();
